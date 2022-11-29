@@ -15,4 +15,4 @@
   doc_root = "${API_DOC_ROOT:-/var/www/html}"
 
 [monitoring]
-  data_storage_days = ${MONITORING_DATA_STORAGE_DAYS:-}
+  data_storage_days = ${MONITORING_DATA_STORAGE_DAYS:-30}

@@ -1,7 +1,8 @@
 FROM alpine:3.15 as downloader
 
-ARG RPORT_VERSION=0.6.0
-ARG FRONTEND_BUILD=0.6.0-build-966
+ARG RPORT_VERSION=0.9.0
+ARG FRONTEND_BUILD=0.9.0-build-1128
+#ARG rportplus=0.1.0
 ARG NOVNC_VERSION=1.3.0
 
 RUN apk add unzip
@@ -13,7 +14,7 @@ RUN set -e \
     && tar xzf rportd.tar.gz rportd
 
 RUN set -e \
-    && wget https://downloads.rport.io/frontend/stable/rport-frontend-stable-${FRONTEND_BUILD}.zip -O frontend.zip \
+    && wget https://downloads.rport.io/frontend/stable/rport-frontend-${FRONTEND_BUILD}.zip -O frontend.zip \
     && unzip frontend.zip -d ./frontend
 
 RUN set -e \
@@ -37,8 +38,11 @@ COPY --from=downloader /envplate/envplate /usr/local/bin/ep
 
 COPY entrypoint.sh /entrypoint.sh
 
-RUN set -e \
-    && useradd -d /var/lib/rport -m -U -r -s /bin/false rport \
+ARG UID=1233
+ARG GID=1233
+
+RUN groupadd -g "${GID}" rport \
+    && useradd -d /var/lib/rport -m -r -u "${UID}" -g "${GID}" -s /bin/false rport \
     && mkdir -p /etc/rport && chown rport:rport /etc/rport
 
 USER rport
