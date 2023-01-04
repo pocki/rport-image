@@ -1,7 +1,7 @@
-FROM alpine:3.15 as downloader
+FROM alpine:3.17 as downloader
 
-ARG RPORT_VERSION=0.9.0
-ARG FRONTEND_BUILD=0.9.0-build-1128
+ARG RPORT_VERSION=0.9.5
+ARG FRONTEND_BUILD=0.9.5-build-1131
 #ARG rportplus=0.1.0
 ARG NOVNC_VERSION=1.3.0
 
@@ -50,8 +50,14 @@ USER rport
 COPY --chown=rport:rport rportd.conf.template /etc/rportd.conf.template
 
 VOLUME [ "/var/lib/rport/" ]
+LABEL maintainer="Christoph Pock <dev+github@pocki.xyz>" \
+    org.label-schema.schema-version="1.0" \
+    org.label-schema.vcs-ref="github.com/pocki/rport-image" \
+    org.label-schema.name="rport" \
+    org.label-schema.description="RPort" \
+    org.label-schema.url="https://github.com/pocki/rport-image" \
+    org.label-schema.vcs-url="https://github.com/pocki/rport-image"
 
-EXPOSE 8080
-EXPOSE 3000
+EXPOSE 8080, 3000
 
 ENTRYPOINT [ "/bin/bash", "/entrypoint.sh", "/usr/local/bin/rportd", "--data-dir", "/var/lib/rport", "--config", "/etc/rport/rportd.conf" ]
