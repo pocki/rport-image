@@ -58,6 +58,7 @@ LABEL maintainer="Christoph Pock <dev+github@pocki.xyz>" \
     org.label-schema.url="https://github.com/pocki/rport-image" \
     org.label-schema.vcs-url="https://github.com/pocki/rport-image"
 
-EXPOSE 8080, 3000
+EXPOSE 8080
+EXPOSE 3000
 
 ENTRYPOINT [ "/bin/bash", "/entrypoint.sh", "/usr/local/bin/rportd", "--data-dir", "/var/lib/rport", "--config", "/etc/rport/rportd.conf" ]
