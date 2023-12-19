@@ -1,3 +1,6 @@
+# RPort is no longer open-source [thanks to RealVNC](https://www.realvnc.com/en/discover/realone/)
+Updates and new versions are no longer possible.
+
 # rport image
 [![Docker](https://github.com/yusufhm/rport-image/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/yusufhm/rport-image/actions/workflows/docker-publish.yml)
 
